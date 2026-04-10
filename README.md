@@ -18,22 +18,22 @@ Proiect hardware pentru un smartwatch open-source, low-cost, realizat în Fusion
 
 ```mermaid
 flowchart LR
-		BATT[LiPo Battery] --> PMIC[BQ25180 Charger + Power Path]
-		USB[USB-C J4] --> ESD[USBLC6 ESD]
-		USB --> PMIC
-		PMIC --> SYS[System Rail]
+  BATT["LiPo Battery"] --> PMIC["BQ25180 Charger + Power Path"]
+  USB["USB-C J4"] --> ESD["USBLC6 ESD"]
+  USB --> PMIC
+  PMIC --> SYS["System Rail"]
 
-		SYS --> MCU[nRF52840 (U1)]
-		SYS --> FG[MAX17048 Fuel Gauge (U3)]
-		SYS --> HAPTIC[DRV2605 + Vibrator Driver (IC1)]
-		SYS --> EPDPWR[RT6160 + passives (IC9)]
+  SYS --> MCU["nRF52840 U1"]
+  SYS --> FG["MAX17048 Fuel Gauge U3"]
+  SYS --> HAPTIC["DRV2605 Vibrator Driver IC1"]
+  SYS --> EPDPWR["RT6160 plus passives IC9"]
 
-		MCU --> RFM[Matching L/C]
-		RFM --> ANT[2450AT18B100E Antenna]
+  MCU --> RFM["Matching L/C"]
+  RFM --> ANT["2450AT18B100E Antenna"]
 
-		MCU --> SWD[TC2030 SWD Header + Test Pads]
-		MCU --> DISP[EPD Connector J1]
-		MCU --> BTN[3x Buttons]
+  MCU --> SWD["TC2030 SWD Header + Test Pads"]
+  MCU --> DISP["EPD Connector J1"]
+  MCU --> BTN["3 Buttons"]
 ```
 
 ## BOM (Bill of Materials)
