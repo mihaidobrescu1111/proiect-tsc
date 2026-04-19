@@ -94,29 +94,62 @@ flowchart LR
 
 | Pin nRF52840 | Net | Rol |
 |---|---|---|
-| `D+` | `N$58` | USB data plus |
-| `D-` | `N$59` | USB data minus |
-| `SWDCLK` | `N$63` | Debug clock |
-| `SWDIO` | `N$64` | Debug data |
-| `ANT` | `N$74` | Ieșire RF către rețeaua de matching + antenă |
-| `XC1`, `XC2` | `N$78`, `N$79` | Cristal 32 MHz |
-| `P0.00/XL1`, `P0.01/XL2` | `N$112`, `N$114` | Cristal 32.768 kHz |
-| `VBUS`, `VDD`, `VDDH`, `DECx`, `VSS` | diverse `N$xx` și `GND` | Alimentare/decuplare conform recomandări Nordic |
+| `D+` | `N$58` | USB data plus (neconfirmat funcțional în documentația text-only) |
+| `D-` | `N$59` | USB data minus (neconfirmat funcțional în documentația text-only) |
+| `SWDCLK` | `SWDCLK` | Debug clock expus la TP_SWDCLK și header SWD |
+| `SWDIO` | `SWDIO` | Debug data bidirecțional expus la TP_SWDIO și header SWD |
+| `SWO` | `SWO` | Serial Wire Output (trace/debug) expus la TP_SWO |
+| `NRST` | `NRST` | Reset hardware expus la TP_RESET |
+| `I2C_SCL` | `I2C_SCL` | Magistrală I2C clock expusă la TP_SCL |
+| `I2C_SDA` | `I2C_SDA` | Magistrală I2C data expusă la TP_SDA |
+| `VDD` monitor/test | `VDD_3V3`, `VDD_3V3_MON` | Rail principal 3V3 + testpoint monitor dedicat |
+| `VREG` | `VREG` | Rail regulator intern/auxiliar expus la TP_VREG |
+| `VBAT` | `VBAT` | Rail baterie expus la TP_VBAT |
+| `ANT` | `RF_MCU_MATCH` -> `RF_MATCH_ANT` | Lanț RF: pin ANT MCU -> matching -> antenă |
+| `EPD control` | `EPD_OP`, `EPD_ON` | Semnale EPD expuse în DFT prin TP_OP/TP_ON |
+| `XC1`, `XC2` | `N$78`, `N$79` | Cristal 32 MHz (neconfirmat pentru redenumire în etapa text-only) |
+| `P0.00/XL1`, `P0.01/XL2` | `N$112`, `N$114` | Cristal 32.768 kHz (neconfirmat pentru redenumire în etapa text-only) |
+| `VBUS`, `VDDH`, `DECx`, `VSS` | diverse `N$xx` și `GND` | Alimentare/decuplare conform recomandări Nordic (parțial neconfirmat) |
 
 ### GPIO generale
 
 `P0.02 ... P0.31`, `P1.00 ... P1.15` sunt prezente pe neturi interne `N$44...N$111`.
 
-## Consumul de putere (estimare de ordin de mărime)
+## Consumul de putere (power budget estimativ, fără măsurători)
 
-Estimare orientativă:
+Estimările de mai jos sunt orientative și bazate pe:
 
-- Sleep profund (MCU + fuel gauge): ordinul zecilor de µA.
-- Activ BLE periodic + UI: ordinul câtorva mA mediu.
-- Refresh display + haptic: vârfuri semnificativ mai mari, dependente de secvența de comutare a convertorului EPD și durata vibrației.
+- valori tipice din datasheet-uri (`nRF52840`, `MAX17048`, `DRV2605`, `RT6160A`, plus curenți pasivi/leakage)
+- arhitectura din schemă (rail-uri separate pentru MCU, EPD power path și haptic)
+- ipoteză de alimentare LiPo în domeniul nominal, fără derating termic sever
+
+Nu reprezintă rezultate de test în laborator.
+
+### Scenarii de consum
+
+| Scenariu | Interval estimat | Bază estimare |
+|---|---:|---|
+| Sleep | `15 ... 60 µA` | nRF52840 în low-power + fuel gauge activ + leakage rail-uri |
+| Activ BLE periodic | `1.5 ... 6 mA` mediu | duty-cycle radio BLE + CPU wakeups periodice + periferice de bază |
+| Refresh display | `8 ... 25 mA` pe durata refresh | convertor EPD (`RT6160A`) + comutări pe rail-urile EPD + control MCU |
+| Haptic activ | `20 ... 85 mA` în impuls | `DRV2605` + motor/vibrator (depinde puternic de pattern/amplitudine) |
 
 Energia pentru o baterie de capacitate $C_{bat}$ [mAh] la curent mediu $I_{avg}$ [mA]:
 
 $$
 t_{autonomie}[h] \approx \frac{C_{bat}}{I_{avg}}
+$$
+
+Exemple numerice (cu ipoteze explicite):
+
+- Caz A, baterie `180 mAh`, profil mixt cu $I_{avg} = 2.5$ mA (BLE periodic + refresh EPD ocazional):
+
+$$
+t \approx \frac{180}{2.5} = 72\ h \approx 3.0\ zile
+$$
+
+- Caz B, baterie `300 mAh`, profil predominant sleep cu burst-uri, $I_{avg} = 0.8$ mA:
+
+$$
+t \approx \frac{300}{0.8} = 375\ h \approx 15.6\ zile
 $$
