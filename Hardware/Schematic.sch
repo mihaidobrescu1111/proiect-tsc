@@ -4710,13 +4710,13 @@ IMU, SWD</text>
 <label x="-424.18" y="33.02" size="1.27" layer="95" rot="MR0" xref="yes"/>
 </segment>
 </net>
-<net name="N$9" class="0">
+<net name="VDD_3V3" class="0">
 <segment>
 <pinref part="TP_3V3" gate="G$1" pin="TP"/>
 <wire x1="-566.42" y1="38.1" x2="-561.34" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$13" class="0">
+<net name="VREG" class="0">
 <segment>
 <pinref part="TP_VREG" gate="G$1" pin="TP"/>
 <wire x1="-566.42" y1="25.4" x2="-561.34" y2="25.4" width="0.1524" layer="91"/>
@@ -4764,13 +4764,13 @@ IMU, SWD</text>
 <wire x1="-510.54" y1="7.62" x2="-510.54" y2="2.54" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$19" class="0">
+<net name="I2C_SCL" class="0">
 <segment>
 <pinref part="TP_SCL" gate="G$1" pin="TP"/>
 <junction x="-510.54" y="20.32"/>
 </segment>
 </net>
-<net name="N$20" class="0">
+<net name="I2C_SDA" class="0">
 <segment>
 <pinref part="TP_SDA" gate="G$1" pin="TP"/>
 <junction x="-510.54" y="2.54"/>
@@ -4889,31 +4889,31 @@ IMU, SWD</text>
 <wire x1="-497.84" y1="-55.88" x2="-490.22" y2="-55.88" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$33" class="0">
+<net name="VDD_3V3_MON" class="0">
 <segment>
 <pinref part="TP_3.3V" gate="G$1" pin="TP"/>
 <wire x1="-434.34" y1="-63.5" x2="-439.42" y2="-63.5" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$34" class="0">
+<net name="NRST" class="0">
 <segment>
 <pinref part="TP_RESET" gate="G$1" pin="TP"/>
 <wire x1="-434.34" y1="-55.88" x2="-439.42" y2="-55.88" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$35" class="0">
+<net name="SWDCLK" class="0">
 <segment>
 <pinref part="TP_SWDCLK" gate="G$1" pin="TP"/>
 <wire x1="-434.34" y1="-48.26" x2="-439.42" y2="-48.26" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$36" class="0">
+<net name="SWDIO" class="0">
 <segment>
 <pinref part="TP_SWDIO" gate="G$1" pin="TP"/>
 <wire x1="-434.34" y1="-40.64" x2="-439.42" y2="-40.64" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$37" class="0">
+<net name="SWO" class="0">
 <segment>
 <pinref part="TP_SWO" gate="G$1" pin="TP"/>
 <wire x1="-434.34" y1="-33.02" x2="-439.42" y2="-33.02" width="0.1524" layer="91"/>
@@ -5311,7 +5311,7 @@ IMU, SWD</text>
 <wire x1="-309.88" y1="55.88" x2="-302.26" y2="55.88" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$74" class="0">
+<net name="RF_MCU_MATCH" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="ANT@H23"/>
 <wire x1="-309.88" y1="58.42" x2="-264.16" y2="58.42" width="0.1524" layer="91"/>
@@ -5322,7 +5322,7 @@ IMU, SWD</text>
 <junction x="-264.16" y="58.42"/>
 </segment>
 </net>
-<net name="N$75" class="0">
+<net name="RF_MATCH_ANT" class="0">
 <segment>
 <pinref part="L1" gate="L$1" pin="2"/>
 <wire x1="-246.38" y1="58.42" x2="-243.84" y2="58.42" width="0.1524" layer="91"/>
@@ -6469,13 +6469,13 @@ Protection</text>
 <label x="-246.38" y="142.24" size="1.27" layer="95" rot="MR180" xref="yes"/>
 </segment>
 </net>
-<net name="N$127" class="0">
+<net name="EPD_OP" class="0">
 <segment>
 <pinref part="TP_OP" gate="G$1" pin="TP"/>
 <wire x1="-302.26" y1="218.44" x2="-307.34" y2="218.44" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$128" class="0">
+<net name="EPD_ON" class="0">
 <segment>
 <pinref part="TP_ON" gate="G$1" pin="TP"/>
 <wire x1="-302.26" y1="213.36" x2="-307.34" y2="213.36" width="0.1524" layer="91"/>
@@ -6637,7 +6637,7 @@ Protection</text>
 <label x="-317.5" y="114.3" size="1.27" layer="95" rot="MR180" xref="yes"/>
 </segment>
 </net>
-<net name="N$137" class="0">
+<net name="VBAT" class="0">
 <segment>
 <pinref part="TP_VBAT" gate="G$1" pin="TP"/>
 <wire x1="-373.38" y1="127" x2="-378.46" y2="127" width="0.1524" layer="91"/>
